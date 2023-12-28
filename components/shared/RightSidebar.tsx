@@ -15,7 +15,9 @@ async function RightSidebar() {
     
   });
 
-  const suggestedCommunities = await fetchCommunities({ pageSize: 1 });
+  const suggestedCommunities = await fetchCommunities({pageNumber:1});
+  
+  
 
   return (
     <section className='custom-scrollbar rightsidebar'>

@@ -1,5 +1,7 @@
+"use client"
 import Link from "next/link";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 
 interface Props {
   accountId: string;
@@ -20,7 +22,9 @@ function ProfileHeader({
   bio,
   type,
 }: Props) {
-  const editPath = type==='Community'? '/communities/edit' :'/profile/edit';
+  const params= useParams();
+  
+  const editPath = type==='Community'? `/communities/edit/${params.id}` :'/profile/edit';
   return (
     <div className='flex w-full flex-col justify-start'>
       <div className='flex items-center justify-between'>

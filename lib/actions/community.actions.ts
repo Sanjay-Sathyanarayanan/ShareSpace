@@ -106,8 +106,8 @@ export async function fetchCommunityPosts(id: string) {
 
 export async function fetchCommunities({
   searchString = "",
-  pageNumber = 1,
-  pageSize = 20,
+  pageNumber = 3,
+  pageSize = 5,
   sortBy = "desc",
 }: {
   searchString?: string;
@@ -302,4 +302,18 @@ export async function deleteCommunity(communityId: string) {
     console.error("Error deleting community: ", error);
     throw error;
   }
+}
+
+export async function updateCommunityBio(communtityId: string | string[], communityBio:string){
+  connectToDB();
+  try{
+
+   await Community.findOneAndUpdate({id:communtityId}, {bio: communityBio});
+    
+
+  }catch(error){
+    console.log(error);
+    
+  }
+
 }
