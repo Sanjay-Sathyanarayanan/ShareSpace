@@ -1,5 +1,5 @@
 "use client";
-
+import { useState } from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { useOrganization } from "@clerk/nextjs";
@@ -28,6 +28,7 @@ function PostThread({ userId }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const {organization} = useOrganization();
+  const [isLoading, setIsLoading] = useState(false);
   // console.log('comm',organization);
   
   const form = useForm<z.infer<typeof ThreadValidation>>({
@@ -39,6 +40,8 @@ function PostThread({ userId }: Props) {
   });
 
   const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
+
+    setIsLoading(true);
     await createThread({
       text: values.thread,
       author: userId,
@@ -71,8 +74,8 @@ function PostThread({ userId }: Props) {
           )}
         />
 
-        <Button type='submit' className='bg-primary-500'>
-          Post Thread
+        <Button type='submit' disabled={isLoading} className='bg-primary-500'>
+          {isLoading ? "Posting...": "Post Thread"}
         </Button>
       </form>
     </Form>

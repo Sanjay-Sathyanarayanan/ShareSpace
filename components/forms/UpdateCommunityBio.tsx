@@ -1,5 +1,5 @@
 "use client";
-
+import { useState } from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { useOrganization } from "@clerk/nextjs";
@@ -22,7 +22,9 @@ import { updateCommunityBio } from "@/lib/actions/community.actions";
 
 
 
+
 function UpdateCommunityBio() {
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter();
   const param = useParams();
   
@@ -40,6 +42,7 @@ function UpdateCommunityBio() {
 
   const onSubmit = async (values: z.infer<typeof BioValidation>) => {
    await updateCommunityBio(param.id, values.bio);
+   setIsLoading(false);
     router.push(`/communities/${param.id}`);
   };
 
@@ -65,7 +68,7 @@ function UpdateCommunityBio() {
           )}
         />
 
-        <Button type='submit' className='bg-primary-500'>
+        <Button type='submit' disabled={isLoading} className='bg-primary-500'>
           Update Bio
         </Button>
       </form>

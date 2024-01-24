@@ -1,5 +1,5 @@
 "use client";
-
+import { useState } from "react";
 import { z } from "zod";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
@@ -27,6 +27,7 @@ interface Props {
 }
 
 function Comment({ threadId, currentUserImg, currentUserId }: Props) {
+  const [isLoading, setIsLoading] = useState(false);
   const pathname = usePathname();
 
   const form = useForm<z.infer<typeof CommentValidation>>({
@@ -37,6 +38,7 @@ function Comment({ threadId, currentUserImg, currentUserId }: Props) {
   });
 
   const onSubmit = async (values: z.infer<typeof CommentValidation>) => {
+    setIsLoading(false);
     await addCommentToThread(
       threadId,
       values.thread,
@@ -76,7 +78,7 @@ function Comment({ threadId, currentUserImg, currentUserId }: Props) {
           )}
         />
 
-        <Button type='submit' className='comment-form_btn'>
+        <Button type='submit' disabled={isLoading} className='comment-form_btn'>
           Reply
         </Button>
       </form>

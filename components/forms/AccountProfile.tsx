@@ -46,6 +46,8 @@ const AccountProfile = ({ user, btnTitle,  }: Props) => {
   const pathname = usePathname();
   const { startUpload } = useUploadThing("media");
 
+
+  const [isLoading, setIsLoading] = useState(false)
  
   const [files, setFiles] = useState<File[]>([]);
 
@@ -60,6 +62,7 @@ const AccountProfile = ({ user, btnTitle,  }: Props) => {
   });
 
   const onSubmit = async (values: z.infer<typeof UserValidation>) => {
+    
     const blob = values.profile_photo;
 
     const hasImageChanged = isBase64Image(blob);
@@ -70,7 +73,7 @@ const AccountProfile = ({ user, btnTitle,  }: Props) => {
         values.profile_photo = imgRes[0].fileUrl;
       }
     }
-    
+    setIsLoading(false);
     await updateUser({
       name: values.name,
       path: pathname,
@@ -224,7 +227,7 @@ const AccountProfile = ({ user, btnTitle,  }: Props) => {
           )}
         />
 
-        <Button type='submit' className='bg-primary-500'>
+        <Button type='submit' disabled={isLoading} className='bg-primary-500'>
           {btnTitle}
         </Button>
       </form>
