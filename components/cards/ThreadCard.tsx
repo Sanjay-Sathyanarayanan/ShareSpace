@@ -69,14 +69,14 @@ function ThreadCard({
             <p className="mt-2 text-small-regular text-light-2">{content}</p>
 
             <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
-              <div className="flex gap-3.5">
-                {/* <Image
+              <div className="flex justify-end gap-5">
+                <Image
                   src="/assets/heart-gray.svg"
                   alt="heart"
                   width={24}
                   height={24}
                   className="cursor-pointer object-contain"
-                /> */}
+                />
                 <Link href={`/thread/${id}`}>
                   <Image
                     src="/assets/reply.svg"
