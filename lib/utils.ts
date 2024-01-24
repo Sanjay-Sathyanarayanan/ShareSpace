@@ -24,8 +24,10 @@ export function formatDateString(dateString: string) {
   const formattedDate = date.toLocaleDateString(undefined, options);
 
   const time = date.toLocaleTimeString([], {
+    timeZone: 'Asia/Kolkata',
     hour: "numeric",
     minute: "2-digit",
+
   });
 
   return `${time} - ${formattedDate}`;

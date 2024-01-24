@@ -1,3 +1,4 @@
+"use client" // for showing the local time based on the client system for format date string
 import Image from "next/image";
 import Link from "next/link";
 import { formatDateString } from "@/lib/utils";
