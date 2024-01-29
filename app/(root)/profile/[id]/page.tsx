@@ -17,6 +17,8 @@ async function Page({ params }: { params: { id: string } }) {
   if (!user) return null;
 
   const userInfo = await fetchUser(params.id);
+  console.log(userInfo);
+  
   if (!userInfo?.onboarded) redirect("/onboarding");
   
   
@@ -67,7 +69,7 @@ async function Page({ params }: { params: { id: string } }) {
               value='threads'
               className='w-full text-light-1'
             >
-              {/* @ts-ignore */}
+            
               <ThreadsTab
                 currentUserId={user.id}
                 accountId={userInfo.id}

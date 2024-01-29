@@ -15,8 +15,6 @@ export default async function Home() {
     <>
     <div className="head-text text-light-1 ">
       Home
-      
-
     </div>
     <section className='mt-9 flex flex-col gap-10'>
     {result?.posts.length === 0 ? (
